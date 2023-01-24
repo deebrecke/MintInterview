@@ -10,13 +10,17 @@ public class DuplicateString {
         String thirdString = "acd$%5";//check string with characters other than letters
         String fourthString = "The Big";//check string with no duplicate letters but a space
         String fifthString = "Do it be?";//check with not duplicate letters but two spaces
+        String sixthString = "There are duplicates here";
 
         System.out.println(firstString + ": " + hasDuplicateAny(fifthString));//false in any method
         System.out.println(secondString + ": " + hasDuplicateAny(secondString));//true
-        System.out.println(secondString + ": " + hasDuplicateCaseSensitive(secondString));//false
+        System.out.println(secondString + ": " + hasDuplicateNoCase(secondString));//false
         //third and fourth strings come up false in either case
         //this will be true in either method below--never came up with a way to ignore spaces.
         System.out.println(fifthString + ": " + hasDuplicateAny(fifthString));
+
+        System.out.println(hasDuplicateNotSpaces(fifthString));
+        System.out.println(hasDuplicateNotSpaces(sixthString));
     }
 
     /**
@@ -44,7 +48,7 @@ public class DuplicateString {
      * @param stringToCheck
      * @return
      */
-    public static boolean hasDuplicateCaseSensitive(String stringToCheck) {
+    public static boolean hasDuplicateNoCase(String stringToCheck) {
         Set<Character> set = new HashSet<>();
 
         for (int i = 0; i < stringToCheck.length(); i++) {
@@ -56,11 +60,26 @@ public class DuplicateString {
         }
         return false;
     }
-    /*
-    My attempts to use this same process to check a string and not include the spaces as
-    a character came up empty. The attempts I made were clearly slower and more complex than
-    taking a different approach might have been (adding extra data structures which needed more
-    itterations, causing a big O(n squared or worse) issue.
+
+    //use regex with replaceAll method
+
+    /**
+     *
+     * @param stringToCheck
+     * @return true if no characters are duplicate even if there are spaces (case-sensitive)
      */
+    public static boolean hasDuplicateNotSpaces(String stringToCheck){
+        String noSpaces = stringToCheck.replaceAll("\\s", "");
+        Set<Character> set = new HashSet<>();
+
+        for (int i = 0; i < noSpaces.length(); i++) {
+            set.add(noSpaces.charAt(i));
+        }
+        if(noSpaces.length() != set.size()){
+            return true;
+        }
+        return false;
+    }
+
 
  }//end of class
