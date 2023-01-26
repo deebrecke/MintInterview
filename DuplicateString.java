@@ -15,12 +15,10 @@ public class DuplicateString {
         System.out.println(firstString + ": " + hasDuplicateAny(fifthString));//false in any method
         System.out.println(secondString + ": " + hasDuplicateAny(secondString));//true
         System.out.println(secondString + ": " + hasDuplicateNoCase(secondString));//false
-        //third and fourth strings come up false in either case
-        //this will be true in either method below--never came up with a way to ignore spaces.
-        System.out.println(fifthString + ": " + hasDuplicateAny(fifthString));
-
-        System.out.println(hasDuplicateNotSpaces(fifthString));
-        System.out.println(hasDuplicateNotSpaces(sixthString));
+        //third and fourth strings come up false in any case
+        System.out.println(fifthString + ": " + hasDuplicateAny(fifthString));//true if counting spaces
+        System.out.println(fifthString + " Not including spaces: " + hasDuplicateNotSpaces(fifthString));//false if not counting spaces
+        System.out.println(sixthString + ": " + hasDuplicateNotSpaces(sixthString));//true in any case
     }
 
     /**
